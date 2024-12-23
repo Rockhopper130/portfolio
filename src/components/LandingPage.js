@@ -26,7 +26,6 @@ const Header = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: auto;
     text-align: center;
   }
 `;
