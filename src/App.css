@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+@font-face {
+  font-family: RoleModel;
+  src: url("RoleModel.otf");
+}
+
+html {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: 400vh;
+  cursor: none;
+}
+canvas {
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1000;
+}
+
+.landing-page {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

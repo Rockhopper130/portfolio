@@ -1,0 +1,18 @@
+.
+├── README.md
+├── directory_structure.txt
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   └── index.html
+└── src
+    ├── App.css
+    ├── App.js
+    ├── RoleModel.otf
+    ├── components
+    │   └── ScrollAnimation.js
+    ├── index.css
+    └── index.js
+
+2074 directories, 5410 files
