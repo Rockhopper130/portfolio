@@ -98,16 +98,20 @@ const CardDescription = styled.p`
   flex-grow: 1;
 `;
 
-const CardLink = styled.button`
+const CardLink = styled.a`
   font-size: 14px;
   padding: 0.5rem;
   color: white;
-  background-color:rgb(90, 90, 90);
+  background-color: rgb(90, 90, 90);
   border: none;
   font-weight: bold;
   border-radius: 1rem;
   cursor: pointer;
   transition: background-color 0.1s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
   &:hover {
     background-color: rgb(76, 76, 76);
   }
@@ -156,7 +160,6 @@ const Heading = styled.h2`
   @media (max-width: 1024px) {
     padding-left: 0;
     text-align: center;
-
   }
 `;
 
