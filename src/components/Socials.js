@@ -57,7 +57,7 @@ const Socials = () => {
         rel="noopener noreferrer"
       >
         <Link
-          src="/images/resume.svg"
+          src="/images/cv.svg"
           alt="Resume"
         />
       </a>
@@ -67,7 +67,7 @@ const Socials = () => {
         rel="noopener noreferrer"
       >
         <Link
-          src="/images/mail.svg"
+          src="/images/email.svg"
           alt="Mail"
         />
       </a>

@@ -1,6 +1,6 @@
 export const expData = [
     {
-        "name": "Thoughtspot",
+        "name": "ThoughtSpot",
         "role": "Coming Soon",
         "image": "/images/ts.png",
         "time": "August 2025*",

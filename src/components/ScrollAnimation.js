@@ -141,52 +141,15 @@ const ScrollAnimation = () => {
 
   return (
     <div>
-      <svg
-        width="30"
-        height="71"
-        viewBox="0 0 30 71"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          position: "absolute",
-          left: "49%",
-          top: "20%",
-        }}
-      >
-        <rect
-          x="1.5"
-          y="1.5"
-          width="27"
-          height="45"
-          rx="13.5"
-          stroke="#ffff"
-          stroke-opacity="0.6"
-          stroke-width="3"
-        ></rect>
-        <path
-          d="M15 12V20"
-          stroke="#ffff"
-          stroke-opacity="0.6"
-          stroke-width="3"
-          stroke-linecap="round"
-        ></path>
-        <path
-          d="M8 54L14.5 60.5L21 54"
-          stroke="#ffff"
-          stroke-opacity="0.6"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M8 63L14.5 69.5L21 63"
-          stroke="#ffff"
-          stroke-opacity="0.6"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-      </svg>
+      {/* <img src="/images/scroll.svg" alt="Scroll Down Icon" style={{height: "100px", width: "100px"}}/> */}
+      <div style={{
+        position: "absolute",
+        left: "47vw",
+        top: "30%",
+        fontFamily: "Helvetica Neue",
+      }}>
+        Scroll Down
+      </div>
       <Nishchay ref={textElement}>Nishchay</Nishchay>
       <Nilabh ref={textElementInverse}>Nilabh</Nilabh>
       <div ref={canvasRef} style={{ position: "fixed" }}></div>

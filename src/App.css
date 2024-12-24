@@ -4,6 +4,10 @@
   src: url("RoleModel.otf");
 }
 
+* {
+  font-family: "Helvetica Neue";
+}
+
 html {
   background-color: black;
   color: white;

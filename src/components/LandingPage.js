@@ -35,7 +35,7 @@ const TextBoxContainer = styled.div`
   flex-direction: column;
   margin: 8rem 0rem;
   font-size: 2rem;
-  font-weight: 100;
+  font-weight: 200;
   align-items: flex-start;
   width: 50%;
 
@@ -97,11 +97,11 @@ const LandingPage = () => {
         <ParallaxImage src="/images/landing-image.jpeg"></ParallaxImage>
         <TextBox></TextBox>
       </Header>
-      <div id="experiences">
-        <Experiences />
-      </div>
       <div id="projects">
         <Projects />
+      </div>
+      <div id="experiences">
+        <Experiences />
       </div>
       <div id="footer">
         <Footer />
