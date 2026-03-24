@@ -1,47 +1,110 @@
-@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;1,14..32,300&display=swap");
+
 @font-face {
   font-family: RoleModel;
   src: url("RoleModel.otf");
 }
 
+/* ── Design tokens — blue monotone ── */
+:root {
+  --bg:              #06080f;
+  --surface:         #0c1220;
+  --surface-2:       #131d30;
+  --border:          rgba(107, 156, 240, 0.14);
+  --border-strong:   rgba(107, 156, 240, 0.28);
+
+  --text:            #e8ecff;
+  --text-secondary:  rgba(180, 205, 255, 0.72);
+  --text-tertiary:   rgba(150, 180, 255, 0.42);
+
+  --accent:          #6b9cf0;
+  --accent-bright:   #89b4ff;
+  --accent-dim:      rgba(107, 156, 240, 0.1);
+
+  --radius:    12px;
+  --radius-sm: 6px;
+  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base ── */
 * {
-  font-family: "Helvetica Neue";
+  box-sizing: border-box;
+  font-family: "Inter", "Helvetica Neue", sans-serif;
 }
 
 html {
-  background-color: black;
-  color: white;
+  background-color: var(--bg);
+  color: var(--text);
   margin: 0;
   padding: 0;
-  overflow: auto;
-  height: 400vh;
+  overflow-x: hidden;
   cursor: none;
-}
-canvas {
-  display: block;
-  top: 0;
-  left: 0;
+  font-size: 16px;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Film grain ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.032;
+  pointer-events: none;
+  z-index: 9997;
+  animation: grain 8s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%   { transform: translate(0,   0) }
+  10%  { transform: translate(-5%, -5%) }
+  20%  { transform: translate(-10%, 5%) }
+  30%  { transform: translate(5%, -10%) }
+  40%  { transform: translate(-5%, 15%) }
+  50%  { transform: translate(-10%, 5%) }
+  60%  { transform: translate(15%, 0) }
+  70%  { transform: translate(0, 10%) }
+  80%  { transform: translate(-15%, 0) }
+  90%  { transform: translate(10%, 5%) }
+  100% { transform: translate(5%, 0) }
+}
+
+/* ── Canvas ── */
+canvas { display: block; }
+
+/* ── Loading / page fade ── */
 .loading-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
+  inset: 0;
+  background-color: var(--bg);
   z-index: 1000;
 }
 
 .landing-page {
-  animation: fadeIn 1s ease-in;
+  animation: fadeIn 0.85s ease-out both;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── Selection ── */
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent-bright);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(107, 156, 240, 0.2); border-radius: 2px; }

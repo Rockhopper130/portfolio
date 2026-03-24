@@ -24,8 +24,6 @@ function useCustomCursor() {
     const size = 8;
     const sizeF = 36;
     const followSpeed = 0.16;
-    let clicked = false;
-
     if ("ontouchstart" in window) {
       cursor.style.display = "none";
       cursorF.style.display = "none";
@@ -34,12 +32,16 @@ function useCustomCursor() {
 
     cursor.style.setProperty("--size", `${size}px`);
     cursorF.style.setProperty("--size", `${sizeF}px`);
+    cursor.style.opacity = "0";
+    cursorF.style.opacity = "0";
 
     const handleMouseMove = (e) => {
       pageX = e.clientX;
       pageY = e.clientY;
       cursor.style.left = `${pageX - size / 2}px`;
       cursor.style.top = `${pageY - size / 2}px`;
+      cursor.style.opacity = "1";
+      cursorF.style.opacity = "1";
     };
 
     const loop = () => {
@@ -53,13 +55,11 @@ function useCustomCursor() {
     const handleMouseDown = () => {
       gsap.to(cursor, { scale: 4.5 });
       gsap.to(cursorF, { scale: 0.4 });
-      clicked = true;
     };
 
     const handleMouseUp = () => {
       gsap.to(cursor, { scale: 1 });
       gsap.to(cursorF, { scale: 1 });
-      clicked = false;
     };
 
     window.addEventListener("mousemove", handleMouseMove);

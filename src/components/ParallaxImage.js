@@ -1,64 +1,61 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const ParallaxContainer = styled.div`
+const Container = styled.div`
+  width: 38%;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
   overflow: hidden;
-  display: inline-block;
-  perspective: 1000px;
-  border-radius: 10px;
-  height: 100%;
-  width: 40%;
+  align-self: center;
 
   @media (max-width: 1024px) {
     display: none;
   }
 `;
 
-const ParallaxImageStyled = styled.img`
-  transform: ${({ offsetX, offsetY, isHovered }) =>
-    `translate(${offsetX}px, ${offsetY}px) scale(${isHovered ? 1.05 : 1})`};
-  transition: transform 0.8s ease-out;
-  will-change: transform;
-  height: 100%;
+const Img = styled.img`
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform: ${({ $ox, $oy, $hovered }) =>
+    `translate(${$ox}px, ${$oy}px) scale(${$hovered ? 1.04 : 1})`};
+  transition: transform 0.7s ease-out;
+  will-change: transform;
   user-select: none;
 `;
 
-const ParallaxImage = ({ src, alt, maxOffset = 15 }) => {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+const ParallaxImage = ({ src, alt = "", maxOffset = 10 }) => {
+  const [offset, setOffset]   = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY, currentTarget } = e;
     const { width, height, left, top } = currentTarget.getBoundingClientRect();
-
-    const x = ((clientX - left) / width - 0.5) * -0.5 * maxOffset;
-    const y = ((clientY - top) / height - 0.5) * -0.5 * maxOffset;
-
-    setOffset({ x, y });
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOffset({ x: 0, y: 0 });
-    setIsHovered(false);
+    setOffset({
+      x: ((clientX - left) / width  - 0.5) * -0.5 * maxOffset,
+      y: ((clientY - top)  / height - 0.5) * -0.5 * maxOffset,
+    });
+    setHovered(true);
   };
 
   return (
-    <ParallaxContainer
+    <Container
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => { setOffset({ x: 0, y: 0 }); setHovered(false); }}
     >
-      <ParallaxImageStyled
+      <Img
         src={src}
         alt={alt}
-        offsetX={offset.x}
-        offsetY={offset.y}
-        isHovered={isHovered}
+        $ox={offset.x}
+        $oy={offset.y}
+        $hovered={hovered}
         draggable="false"
       />
-    </ParallaxContainer>
+    </Container>
   );
 };
 

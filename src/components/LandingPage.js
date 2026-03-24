@@ -5,107 +5,158 @@ import Socials from "./Socials";
 import ParallaxImage from "./ParallaxImage";
 import Experiences from "./Experiences";
 import Projects from "./Projects";
+import Skills from "./Skills";
 import Footer from "./Footer";
-
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import Lenis from "lenis";
+import { personal } from "../data/content";
 
-const Header = styled.div`
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Hero ── */
+const Hero = styled.section`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
-  width: 100vw;
-  color: white;
-  overflow: hidden;
+  min-height: 100vh;
+  padding: 0 5rem;
+  gap: 4rem;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    padding: 6rem 2.5rem 4rem;
+    justify-content: center;
+    gap: 3rem;
   }
 
-  @media (max-width: 768px) {
-    text-align: center;
+  @media (max-width: 480px) {
+    padding: 5rem 1.5rem 3rem;
   }
 `;
 
-const TextBoxContainer = styled.div`
+const HeroText = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 8rem 0rem;
-  font-size: 2rem;
-  font-weight: 200;
-  align-items: flex-start;
-  width: 50%;
+  max-width: 580px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     align-items: center;
     text-align: center;
-    margin: 4rem 0rem;
-    width: 80%;
+    max-width: 100%;
   }
 `;
 
-const TextBox = () => {
-  return (
-    <TextBoxContainer>
-      <div>
-        <p>
-          Hi, I am{" "}
-          <div style={{ fontWeight: "500", fontSize: "4rem" }}>Nishchay</div>
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-          }}
-        >
-          Final-year student, IIT Guwahati
-        </p>
-        <p
-          style={{
-            fontSize: "1.5rem",
-          }}
-        >
-          Major in Data Science and Artificial Intelligence
-        </p>
-      </div>
-      <Socials></Socials>
-    </TextBoxContainer>
-  );
-};
+const Greeting = styled.span`
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+`;
+
+const BigName = styled.h1`
+  font-family: "RoleModel", sans-serif;
+  font-size: clamp(5rem, 9.5vw, 8.5rem);
+  font-weight: 400;
+  margin: 0 0 1.4rem 0;
+  line-height: 0.93;
+  color: var(--text);
+  letter-spacing: -0.01em;
+`;
+
+const Tagline = styled.p`
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0 0 0.4rem 0;
+`;
+
+const Major = styled.p`
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-tertiary);
+  margin: 0 0 1.6rem 0;
+  letter-spacing: 0.02em;
+`;
+
+const Divider = styled.div`
+  width: 2.5rem;
+  height: 1px;
+  background: var(--border-strong);
+  margin-bottom: 1.1rem;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Bio = styled.p`
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0 0 2.5rem 0;
+  max-width: 440px;
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+  }
+`;
+
+/* ── Main wrapper ── */
+const Main = styled.main`
+  padding: 0 5rem;
+
+  @media (max-width: 1024px) {
+    padding: 0 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1.5rem;
+  }
+`;
 
 const LandingPage = () => {
   useEffect(() => {
+    document.documentElement.style.height = "auto";
+    return () => { document.documentElement.style.height = ""; };
+  }, []);
+
+  useEffect(() => {
     const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
+    return () => { lenis.destroy(); };
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8rem",
-      }}
-    >
-      <Header>
-        <ParallaxImage src="/images/landing-image.jpeg"></ParallaxImage>
-        <TextBox></TextBox>
-      </Header>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="experiences">
-        <Experiences />
-      </div>
-      <div id="footer">
-        <Footer />
-      </div>
+    <div>
+      <Hero>
+        <HeroText>
+          <Greeting>Hi, I'm</Greeting>
+          <BigName>{personal.firstName}</BigName>
+          <Tagline>{personal.tagline}</Tagline>
+          <Major>{personal.major}</Major>
+          <Divider />
+          <Bio>{personal.bio}</Bio>
+          <Socials />
+        </HeroText>
+        <ParallaxImage src={personal.photo} alt={personal.name} />
+      </Hero>
+
+      <Main>
+        <Skills />
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="experiences">
+          <Experiences />
+        </div>
+      </Main>
+
+      <Footer />
     </div>
   );
 };
