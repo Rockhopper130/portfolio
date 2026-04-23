@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ScrollAnimation from "./components/ScrollAnimation";
 import LandingPage from "./components/LandingPage";
@@ -24,6 +24,7 @@ function useCustomCursor() {
     const size = 8;
     const sizeF = 36;
     const followSpeed = 0.16;
+
     if ("ontouchstart" in window) {
       cursor.style.display = "none";
       cursorF.style.display = "none";
@@ -76,54 +77,40 @@ function useCustomCursor() {
   }, []);
 }
 
-function App() {
-  useCustomCursor();
-
-  const [defaultRoute, setDefaultRoute] = useState("/");
-
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      setDefaultRoute("/landing-page");
-    }
-  }, []);
-
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            defaultRoute === "/" ? (
-              <ScrollAnimation />
-            ) : (
-              <Navigate to="/landing-page" replace />
-            )
-          }
-        />
-        <Route path="/landing-page" element={<LandingPageWrapper />} />
-      </Routes>
-    </Router>
-  );
-}
-
-function LandingPageWrapper() {
-  const [isLoading, setIsLoading] = useState(true);
+function HomePage() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [showLanding, setShowLanding] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <div>
-      {isLoading ? (
-        <div className="loading-screen"></div>
-      ) : (
+      {!isMobile && !showLanding && (
+        <ScrollAnimation onComplete={() => { window.scrollTo(0, 0); setShowLanding(true); }} />
+      )}
+      {showLanding && (
         <div className="landing-page">
           <LandingPage />
         </div>
       )}
     </div>
+  );
+}
+
+function App() {
+  useCustomCursor();
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 

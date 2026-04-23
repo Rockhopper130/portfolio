@@ -85,7 +85,7 @@ const Vignette = styled.div`
 `;
 
 /* ── Component ── */
-const ScrollAnimation = () => {
+const ScrollAnimation = ({ onComplete }) => {
   const canvasRef    = useRef(null);
   const nishchayRef  = useRef(null);
   const nilabhRef    = useRef(null);
@@ -206,12 +206,7 @@ const ScrollAnimation = () => {
       /* Navigate when the user has scrolled far enough */
       if (targetScroll >= maxScroll * 0.98 && !scrollLock) {
         scrollLock = true;
-        const overlay = document.createElement("div");
-        overlay.style.cssText =
-          "position:fixed;top:0;left:0;width:100%;height:100%;background:#06080f;z-index:9999;opacity:0;transition:opacity 0.45s ease;pointer-events:none;";
-        document.body.appendChild(overlay);
-        requestAnimationFrame(() => { overlay.style.opacity = "1"; });
-        setTimeout(() => { window.location.replace("/landing-page"); }, 480);
+        onComplete();
       }
     };
 
@@ -224,7 +219,7 @@ const ScrollAnimation = () => {
       renderer.domElement.remove();
       renderer.dispose();
     };
-  }, []);
+  }, [onComplete]);
 
   return (
     /* 400vh tall div provides the scroll area for native scroll */

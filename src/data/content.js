@@ -8,7 +8,7 @@ export const personal = {
   firstName: "Nishchay",
   lastName: "Nilabh",
   tagline: "MTS @ ThoughtSpot",
-  major: "Alumnus IIT Guwahati, Data Science & Artificial Intelligence",
+  major: "Alumnus IIT Guwahati 25', Data Science & Artificial Intelligence",
   bio: "Shipping Agentic AI at ThoughtSpot. Registering 3D MRIs at CMU. Researching how machines perceive, engineering how they act.",
   email: "nishchay.n2003@gmail.com",
   photo: "/images/landing-image.jpeg",
@@ -45,18 +45,18 @@ export const socials = [
 export const skills = [
   {
     category: "Core",
-    items: ["Python", "C++", "Java", "PyTorch", "TensorFlow", "LangGraph"],
+    items: ["Python", "C++", "Java", "PyTorch", "TensorFlow"],
+  },
+  {
+    category: "ML",
+    items: ["OpenCV", "Open3D", "Pyannote", "LangGraph"],
   },
   {
     category: "Systems",
-    items: ["Git", "Docker", "Kubernetes", "AWS", "Jenkins"],
+    items: ["Git", "Docker", "Kubernetes", "AWS", "Jenkins", "Redis"],
   },
   {
-    category: "Research",
-    items: ["OpenCV", "Open3D", "Pyannote", "Weights & Biases"],
-  },
-  {
-    category: "ML Ops",
+    category: "Ops & Observability",
     items: ["Grafana", "Kibana", "Jaeger", "Spinnaker"],
   },
 ];
@@ -100,7 +100,7 @@ export const projects = [
 export const experiences = [
   {
     name: "ThoughtSpot",
-    role: "Software Engineering Intern",
+    role: "Member of Technical Staff (ML)",
     image: "/images/thoughtspot.png",
     time: "August 2025 - Present",
   },
